@@ -1,22 +1,14 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "2"
-  creationTimestamp: 2017-05-07T12:15:10Z
-  generation: 3
   labels:
-    app: fpm
-  name: fpm
-  namespace: default
-  resourceVersion: "12302177"
-  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/fpm
-  uid: d0b1f7b7-331e-11e7-9512-000c29db7697
+    app: anepal-fpm
+  name: anepal-fpm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fpm
+      app: anepal-fpm
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -26,12 +18,12 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: fpm
+        app: anepal-fpm
     spec:
       containers:
       - image: kube-master01.tikejhya.com:5000/php-fpm7-mysqli:v1
         imagePullPolicy: IfNotPresent
-        name: fpm
+        name: anepal-fpm
         ports:
         - containerPort: 9000
           protocol: TCP
@@ -58,15 +50,3 @@ spec:
       - hostPath:
           path: /data/registry_tikejhya/vol/www.ashishnepal.com/logs/fpm_log
         name: phpfpm-logs
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: 2017-08-16T21:49:06Z
-    lastUpdateTime: 2017-08-16T21:49:06Z
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  observedGeneration: 3
-  replicas: 1
-  updatedReplicas: 1

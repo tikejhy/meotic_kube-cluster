@@ -2,17 +2,17 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: meotic-nginx
+    app: tikejhya-nginx
     env: prod
-    proj: meotic
-  name: meotic-nginx
+    proj: tikejhya
+  name: tikejhya-nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: meotic-nginx
+      app: tikejhya-nginx
       env: prod
-      proj: meotic
+      proj: tikejhya
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -22,15 +22,15 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: meotic-nginx
+        app: tikejhya-nginx
         env: prod
-        proj: meotic
-      name: nginx
+        proj: tikejhya
+      name: tikejhya-nginx
     spec:
       containers:
       - image: nginx
         imagePullPolicy: IfNotPresent
-        name: meotic-nginx
+        name: tikejhya-nginx
         ports:
         - containerPort: 80
           protocol: TCP
@@ -39,23 +39,23 @@ spec:
           privileged: false
         terminationMessagePath: /dev/termination-log
         volumeMounts:
-        - mountPath: /data/www.meotic.com/www/
+        - mountPath: /data/www.tikejhya.com/www/
           name: nginx-www-dir
-        - mountPath: /etc/nginx
-          name: nginx-config
-        - mountPath: /data/logs/www.meotic.com/nginx_log/
+        - mountPath: /data/logs/www.tikejhya.com/nginx_log/
           name: nginx-log
+        - mountPath: /etc/nginx
+          name: nginx-config-tikejhya
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
       - hostPath:
-          path: /data/registry_tikejhya/vol/www.meotic.com/www
+          path: /data/registry_tikejhya/vol/www.tikejhya.com/www
         name: nginx-www-dir
       - hostPath:
-          path: /data/registry_tikejhya/nginx_meotic
-        name: nginx-config
-      - hostPath:
-          path: /data/registry_tikejhya/vol/www.meotic.com/logs/nginx_log/
+          path: /data/registry_tikejhya/vol/www.tikejhya.com/logs/nginx_log/
         name: nginx-log
+      - hostPath:
+          path: /data/registry_tikejhya/brand_nginx
+        name: nginx-config-tikejhya

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: anepal-nginx
+    env: prod
+    proj: anepal
+  name: anepal-nginx
+spec:
+  ports:
+  - nodePort: 32597
+    port: 80
+    protocol: TCP
+    targetPort: 81
+  selector:
+    app: anepal-nginx
+    env: prod
+    proj: anepal
+  type: NodePort

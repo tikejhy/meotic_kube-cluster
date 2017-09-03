@@ -23,7 +23,7 @@ spec:
       containers:
       - image: kube-master01.tikejhya.com:5000/php-fpm7-mysqli:v1
         imagePullPolicy: IfNotPresent
-        name: tikejhya-fpm
+        name: meotic-fpm
         ports:
         - containerPort: 9000
           protocol: TCP

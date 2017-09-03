@@ -9,28 +9,28 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: nginx
+          serviceName: anepal-nginx
           servicePort: 80
         path: /
   - host: ashishnepal.com
     http:
       paths:
       - backend:
-          serviceName: nginx
+          serviceName: anepal-nginx
           servicePort: 80
         path: /
   - host: tikejhya.com
     http:
       paths:
       - backend:
-          serviceName: my-nginx
+          serviceName: tikejhya-nginx
           servicePort: 80
         path: /
   - host: www.tikejhya.com
     http:
       paths:
       - backend:
-          serviceName: meotic-nginx
+          serviceName: tikejhya-nginx
           servicePort: 80
         path: /
   - host: meotic.com

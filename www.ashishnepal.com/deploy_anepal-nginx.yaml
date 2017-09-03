@@ -1,0 +1,61 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: anepal-nginx
+    env: prod
+    proj: anepal
+  name: anepal-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anepal-nginx
+      env: prod
+      proj: anepal
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: anepal-nginx
+        env: prod
+        proj: anepal
+      name: anepal-nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: IfNotPresent
+        name: anepal-nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /data/www.ashishnepal.com/www/
+          name: nginx-www-dir
+        - mountPath: /etc/nginx
+          name: nginx-config
+        - mountPath: /data/logs/www.ashishnepal.com/nginx_log/
+          name: nginx-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/registry_tikejhya/vol/www.ashishnepal.com/www
+        name: nginx-www-dir
+      - hostPath:
+          path: /data/registry_tikejhya/nginx
+        name: nginx-config
+      - hostPath:
+          path: /data/registry_tikejhya/vol/www.ashishnepal.com/logs/nginx_log/
+        name: nginx-log

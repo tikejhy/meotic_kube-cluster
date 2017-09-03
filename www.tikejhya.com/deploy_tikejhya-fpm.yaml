@@ -2,13 +2,13 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    app: meotic-fpm
-  name: meotic-fpm
+    app: tikejhya-fpm
+  name: tikejhya-fpm
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: meotic-fpm
+      app: tikejhya-fpm
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -18,19 +18,19 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: meotic-fpm
+        app: tikejhya-fpm
     spec:
       containers:
       - image: kube-master01.tikejhya.com:5000/php-fpm7-mysqli:v1
         imagePullPolicy: IfNotPresent
-        name: meotic-fpm
+        name: tikejhya-fpm
         ports:
         - containerPort: 9000
           protocol: TCP
         resources: {}
         terminationMessagePath: /dev/termination-log
         volumeMounts:
-        - mountPath: /data/www.meotic.com/www/
+        - mountPath: /data/www.tikejhya.com/www/
           name: nginx-www-dir
         - mountPath: /usr/local/etc
           name: phpfpm-config
@@ -42,11 +42,11 @@ spec:
       terminationGracePeriodSeconds: 30
       volumes:
       - hostPath:
-          path: /data/registry_tikejhya/php-fpm-meotic
+          path: /data/registry_tikejhya/php-fpm_tikejhya
         name: phpfpm-config
       - hostPath:
-          path: /data/registry_tikejhya/vol/www.meotic.com/www
+          path: /data/registry_tikejhya/vol/www.tikejhya.com/www
         name: nginx-www-dir
       - hostPath:
-          path: /data/registry_tikejhya/vol/www.meotic.com/logs/fpm_log
+          path: /data/registry_tikejhya/vol/www.tikejhya.com/logs/fpm_log
         name: phpfpm-logs
