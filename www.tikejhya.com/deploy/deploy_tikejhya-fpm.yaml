@@ -1,0 +1,73 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Deployment","apiVersion":"extensions/v1beta1","metadata":{"name":"tikejhya-fpm","creationTimestamp":null},"spec":{"replicas":1,"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"tikejhya-fpm"}},"spec":{"volumes":[{"name":"phpfpm-config","hostPath":{"path":"/data/registry_tikejhya/php-fpm_tikejhya"}},{"name":"nginx-www-dir","hostPath":{"path":"/data/registry_tikejhya/vol/www.tikejhya.com/www"}},{"name":"phpfpm-logs","hostPath":{"path":"/data/registry_tikejhya/vol/www.tikejhya.com/logs/fpm_log"}}],"containers":[{"name":"fpm","image":"kube-master01.tikejhya.com:5000/php-fpm7-mysqli:v1","ports":[{"containerPort":9000}],"resources":{},"volumeMounts":[{"name":"nginx-www-dir","mountPath":"/data/www.tikejhya.com/www/"},{"name":"phpfpm-config","mountPath":"/usr/local/etc"},{"name":"phpfpm-logs","mountPath":"/data/logs"}],"imagePullPolicy":"IfNotPresent"}]}},"strategy":{}},"status":{}}'
+  creationTimestamp: 2017-08-15T21:31:07Z
+  generation: 3
+  labels:
+    app: tikejhya-fpm
+  name: tikejhya-fpm
+  namespace: default
+  resourceVersion: "12277365"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/tikejhya-fpm
+  uid: 0cbf28bf-8201-11e7-90d0-000c29db7697
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tikejhya-fpm
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tikejhya-fpm
+    spec:
+      containers:
+      - image: kube-master01.tikejhya.com:5000/php-fpm7-mysqli:v1
+        imagePullPolicy: IfNotPresent
+        name: fpm
+        ports:
+        - containerPort: 9000
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /data/www.tikejhya.com/www/
+          name: nginx-www-dir
+        - mountPath: /usr/local/etc
+          name: phpfpm-config
+        - mountPath: /data/logs
+          name: phpfpm-logs
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/registry_tikejhya/php-fpm_tikejhya
+        name: phpfpm-config
+      - hostPath:
+          path: /data/registry_tikejhya/vol/www.tikejhya.com/www
+        name: nginx-www-dir
+      - hostPath:
+          path: /data/registry_tikejhya/vol/www.tikejhya.com/logs/fpm_log
+        name: phpfpm-logs
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2017-08-15T21:31:13Z
+    lastUpdateTime: 2017-08-15T21:31:13Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 3
+  replicas: 1
+  updatedReplicas: 1

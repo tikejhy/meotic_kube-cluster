@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: meotic
+    env: prod
+    proj: meotic
+  name: meotic-nginx
+spec:
+  ports:
+  - nodePort: 32497
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: meotic
+    env: prod
+    proj: meotic
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

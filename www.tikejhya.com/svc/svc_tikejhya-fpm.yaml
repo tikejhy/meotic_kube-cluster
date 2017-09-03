@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Service","apiVersion":"v1","metadata":{"name":"tikejhya-fpm","namespace":"default","creationTimestamp":null,"labels":{"app":"tikejhya-fpm"}},"spec":{"ports":[{"protocol":"TCP","port":9000,"targetPort":9000}],"selector":{"app":"tikejhya-fpm"},"type":"ClusterIP"},"status":{"loadBalancer":{}}}'
+  creationTimestamp: 2017-08-15T21:31:07Z
+  labels:
+    app: tikejhya-fpm
+  name: tikejhya-fpm
+  namespace: default
+  resourceVersion: "11916179"
+  selfLink: /api/v1/namespaces/default/services/tikejhya-fpm
+  uid: 0cb284ef-8201-11e7-90d0-000c29db7697
+spec:
+  clusterIP: 10.254.126.218
+  ports:
+  - port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: tikejhya-fpm
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

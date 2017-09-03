@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: www.ashishnepal.com
+  namespace: default
+spec:
+  rules:
+  - host: www.ashishnepal.com
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 80
+        path: /
+  - host: ashishnepal.com
+    http:
+      paths:
+      - backend:
+          serviceName: nginx
+          servicePort: 80
+        path: /
+  - host: tikejhya.com
+    http:
+      paths:
+      - backend:
+          serviceName: my-nginx
+          servicePort: 80
+        path: /
+  - host: www.tikejhya.com
+    http:
+      paths:
+      - backend:
+          serviceName: meotic-nginx
+          servicePort: 80
+        path: /
+  - host: meotic.com
+    http:
+      paths:
+      - backend:
+          serviceName: meotic-nginx
+          servicePort: 80
+        path: /
+  - host: www.meotic.com
+    http:
+      paths:
+      - backend:
+          serviceName: meotic-nginx
+          servicePort: 80
+        path: /
+status:
+  loadBalancer: {}

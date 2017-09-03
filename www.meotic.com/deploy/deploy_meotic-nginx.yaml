@@ -1,0 +1,61 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: meotic-nginx
+    env: prod
+    proj: meotic
+  name: meotic-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: meotic-nginx
+      env: prod
+      proj: meotic
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: meotic-nginx
+        env: prod
+        proj: meotic
+      name: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: IfNotPresent
+        name: meotic-nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /data/www.meotic.com/www/
+          name: nginx-www-dir
+        - mountPath: /etc/nginx
+          name: nginx-config
+        - mountPath: /data/logs/www.meotic.com/nginx_log/
+          name: nginx-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /data/registry_tikejhya/vol/www.meotic.com/www
+        name: nginx-www-dir
+      - hostPath:
+          path: /data/registry_tikejhya/nginx_meotic
+        name: nginx-config
+      - hostPath:
+          path: /data/registry_tikejhya/vol/www.meotic.com/logs/nginx_log/
+        name: nginx-log

@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2017-05-05T13:00:01Z
+  labels:
+    app: fpm
+  name: fpm
+  namespace: default
+  resourceVersion: "1075710"
+  selfLink: /api/v1/namespaces/default/services/fpm
+  uid: c02e2df8-3192-11e7-bc0e-000c29db7697
+spec:
+  clusterIP: 10.254.66.27
+  ports:
+  - port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: fpm
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

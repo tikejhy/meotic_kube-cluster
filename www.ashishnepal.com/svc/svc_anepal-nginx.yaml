@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2017-05-07T12:10:17Z
+  labels:
+    app: nginx
+    env: prod
+    proj: anepal
+  name: nginx
+  namespace: default
+  resourceVersion: "1254734"
+  selfLink: /api/v1/namespaces/default/services/nginx
+  uid: 224625e5-331e-11e7-9512-000c29db7697
+spec:
+  clusterIP: 10.254.139.206
+  ports:
+  - nodePort: 32496
+    port: 80
+    protocol: TCP
+    targetPort: 81
+  selector:
+    app: nginx
+    env: prod
+    proj: anepal
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
