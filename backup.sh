@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#Test pr
+# Test 2 Pr
+#
 
 services="svc deploy ingress"
 for i in $services; do
