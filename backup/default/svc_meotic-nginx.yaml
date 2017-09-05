@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Service","apiVersion":"v1","metadata":{"name":"meotic-nginx","creationTimestamp":null,"labels":{"app":"meotic-nginx","env":"prod","proj":"anepal"}},"spec":{"ports":[{"protocol":"TCP","port":80,"targetPort":80,"nodePort":32524}],"selector":{"app":"meotic-nginx","env":"prod","proj":"anepal"},"type":"LoadBalancer","sessionAffinity":"None"},"status":{"loadBalancer":{}}}'
+  creationTimestamp: 2017-08-20T12:13:10Z
+  labels:
+    app: meotic-nginx
+    env: prod
+    proj: anepal
+  name: meotic-nginx
+  namespace: default
+  resourceVersion: "13540018"
+  selfLink: /api/v1/namespaces/default/services/meotic-nginx
+  uid: eea9c799-85a0-11e7-9a0f-000c29db7697
+spec:
+  clusterIP: 10.254.106.25
+  ports:
+  - nodePort: 32524
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: meotic-nginx
+    env: prod
+    proj: anepal
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}

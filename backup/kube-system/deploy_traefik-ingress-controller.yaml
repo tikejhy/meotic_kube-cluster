@@ -1,0 +1,75 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Deployment","apiVersion":"extensions/v1beta1","metadata":{"name":"traefik-ingress-controller","namespace":"kube-system","creationTimestamp":null,"labels":{"k8s-app":"traefik-ingress-lb"}},"spec":{"replicas":1,"selector":{"matchLabels":{"k8s-app":"traefik-ingress-lb"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"k8s-app":"traefik-ingress-lb","name":"traefik-ingress-lb"}},"spec":{"containers":[{"name":"traefik-ingress-lb","image":"traefik","args":["-d","--web","--web.address=:8081","--kubernetes"],"ports":[{"name":"http","hostPort":80,"containerPort":80},{"name":"admin","containerPort":8081}],"resources":{"limits":{"cpu":"200m","memory":"30Mi"},"requests":{"cpu":"100m","memory":"20Mi"}}}],"terminationGracePeriodSeconds":60,"hostNetwork":true}},"strategy":{}},"status":{}}'
+  creationTimestamp: 2017-05-07T11:31:17Z
+  generation: 2
+  labels:
+    k8s-app: traefik-ingress-lb
+  name: traefik-ingress-controller
+  namespace: kube-system
+  resourceVersion: "13733934"
+  selfLink: /apis/extensions/v1beta1/namespaces/kube-system/deployments/traefik-ingress-controller
+  uid: af5df8d4-3318-11e7-844c-000c29db7697
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: traefik-ingress-lb
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: traefik-ingress-lb
+        name: traefik-ingress-lb
+    spec:
+      containers:
+      - args:
+        - -d
+        - --web
+        - --web.address=:8081
+        - --kubernetes
+        image: traefik
+        imagePullPolicy: Always
+        name: traefik-ingress-lb
+        ports:
+        - containerPort: 80
+          hostPort: 80
+          name: http
+          protocol: TCP
+        - containerPort: 8081
+          hostPort: 8081
+          name: admin
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+            memory: 30Mi
+          requests:
+            cpu: 100m
+            memory: 20Mi
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 60
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2017-05-07T11:31:17Z
+    lastUpdateTime: 2017-05-07T11:31:17Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 2
+  replicas: 1
+  updatedReplicas: 1

@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Deployment","apiVersion":"extensions/v1beta1","metadata":{"name":"monitoring-influxdb","namespace":"kube-system","creationTimestamp":null},"spec":{"replicas":1,"template":{"metadata":{"creationTimestamp":null,"labels":{"k8s-app":"influxdb","task":"monitoring"}},"spec":{"volumes":[{"name":"influxdb-storage","emptyDir":{}}],"containers":[{"name":"influxdb","image":"docker.io/influxdb","resources":{},"volumeMounts":[{"name":"influxdb-storage","mountPath":"/data"}]}]}},"strategy":{}},"status":{}}'
+  creationTimestamp: 2017-09-04T00:34:13Z
+  generation: 1
+  labels:
+    k8s-app: influxdb
+    task: monitoring
+  name: monitoring-influxdb
+  namespace: kube-system
+  resourceVersion: "13733926"
+  selfLink: /apis/extensions/v1beta1/namespaces/kube-system/deployments/monitoring-influxdb
+  uid: c6bcd76b-9108-11e7-83cd-000c29db7697
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: influxdb
+      task: monitoring
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: influxdb
+        task: monitoring
+    spec:
+      containers:
+      - image: docker.io/influxdb
+        imagePullPolicy: Always
+        name: influxdb
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        volumeMounts:
+        - mountPath: /data
+          name: influxdb-storage
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: influxdb-storage
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2017-09-04T00:34:13Z
+    lastUpdateTime: 2017-09-04T00:34:13Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  replicas: 1
+  updatedReplicas: 1

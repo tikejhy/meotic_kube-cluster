@@ -1,0 +1,62 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Deployment","apiVersion":"extensions/v1beta1","metadata":{"name":"heapster","namespace":"kube-system","creationTimestamp":null},"spec":{"replicas":1,"template":{"metadata":{"creationTimestamp":null,"labels":{"k8s-app":"heapster","task":"monitoring"}},"spec":{"containers":[{"name":"heapster","image":"gcr.io/google_containers/heapster-amd64:v1.4.0","command":["/heapster","--source=kubernetes:https://kubernetes.default","--sink=influxdb:http://monitoring-influxdb.kube-system.svc:8086"],"resources":{},"imagePullPolicy":"IfNotPresent"}],"serviceAccountName":"heapster"}},"strategy":{}},"status":{}}'
+  creationTimestamp: 2017-09-03T23:32:04Z
+  generation: 1
+  labels:
+    k8s-app: heapster
+    task: monitoring
+  name: heapster
+  namespace: kube-system
+  resourceVersion: "13733931"
+  selfLink: /apis/extensions/v1beta1/namespaces/kube-system/deployments/heapster
+  uid: 17c9ab88-9100-11e7-83cd-000c29db7697
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: heapster
+      task: monitoring
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: heapster
+        task: monitoring
+    spec:
+      containers:
+      - command:
+        - /heapster
+        - --source=kubernetes:https://kubernetes.default
+        - --sink=influxdb:http://monitoring-influxdb.kube-system.svc:8086
+        image: gcr.io/google_containers/heapster-amd64:v1.4.0
+        imagePullPolicy: IfNotPresent
+        name: heapster
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      serviceAccount: heapster
+      serviceAccountName: heapster
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2017-09-03T23:32:04Z
+    lastUpdateTime: 2017-09-03T23:32:04Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  replicas: 1
+  updatedReplicas: 1

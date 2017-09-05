@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Service","apiVersion":"v1","metadata":{"name":"heapster","namespace":"kube-system","selfLink":"/api/v1/namespaces/kube-system/services/heapster","uid":"17ef31b2-9100-11e7-83cd-000c29db7697","resourceVersion":"13725311","creationTimestamp":"2017-09-03T23:32:04Z","labels":{"kubernetes.io/cluster-service":"true","kubernetes.io/name":"Heapster","task":"monitoring"}},"spec":{"ports":[{"protocol":"TCP","port":80,"targetPort":8082}],"selector":{"k8s-app":"heapster"},"clusterIP":"10.254.182.229","type":"ClusterIP","sessionAffinity":"None"},"status":{"loadBalancer":{}}}'
+  creationTimestamp: 2017-09-04T23:13:16Z
+  labels:
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: Heapster
+    task: monitoring
+  name: heapster
+  namespace: kube-system
+  resourceVersion: "13821193"
+  selfLink: /api/v1/namespaces/kube-system/services/heapster
+  uid: a1af0f1a-91c6-11e7-83cd-000c29db7697
+spec:
+  clusterIP: 10.254.182.229
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8082
+  selector:
+    k8s-app: heapster
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,0 +1,58 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: '{"kind":"Ingress","apiVersion":"extensions/v1beta1","metadata":{"name":"www.ashishnepal.com","namespace":"default","selfLink":"/apis/extensions/v1beta1/namespaces/default/ingresses/www.ashishnepal.com","uid":"35f705a3-3317-11e7-844c-000c29db7697","resourceVersion":"13697673","generation":18,"creationTimestamp":"2017-05-07T11:20:44Z"},"spec":{"rules":[{"host":"www.ashishnepal.com","http":{"paths":[{"path":"/","backend":{"serviceName":"anepal-nginx","servicePort":80}}]}},{"host":"ashishnepal.com","http":{"paths":[{"path":"/","backend":{"serviceName":"anepal-nginx","servicePort":80}}]}},{"host":"tikejhya.com","http":{"paths":[{"path":"/","backend":{"serviceName":"tikejhya-nginx","servicePort":80}}]}},{"host":"www.tikejhya.com","http":{"paths":[{"path":"/","backend":{"serviceName":"tikejhya-nginx","servicePort":80}}]}},{"host":"meotic.com","http":{"paths":[{"path":"/","backend":{"serviceName":"meotic-nginx","servicePort":80}}]}},{"host":"www.meotic.com","http":{"paths":[{"path":"/","backend":{"serviceName":"meotic-nginx","servicePort":80}}]}}]},"status":{"loadBalancer":{}}}'
+  creationTimestamp: 2017-05-07T11:20:44Z
+  generation: 19
+  name: www.ashishnepal.com
+  namespace: default
+  resourceVersion: "13699814"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/ingresses/www.ashishnepal.com
+  uid: 35f705a3-3317-11e7-844c-000c29db7697
+spec:
+  rules:
+  - host: www.ashishnepal.com
+    http:
+      paths:
+      - backend:
+          serviceName: anepal-nginx
+          servicePort: 80
+        path: /
+  - host: ashishnepal.com
+    http:
+      paths:
+      - backend:
+          serviceName: anepal-nginx
+          servicePort: 80
+        path: /
+  - host: tikejhya.com
+    http:
+      paths:
+      - backend:
+          serviceName: tikejhya-nginx
+          servicePort: 80
+        path: /
+  - host: www.tikejhya.com
+    http:
+      paths:
+      - backend:
+          serviceName: tikejhya-nginx
+          servicePort: 80
+        path: /
+  - host: meotic.com
+    http:
+      paths:
+      - backend:
+          serviceName: meotic-nginx
+          servicePort: 80
+        path: /
+  - host: www.meotic.com
+    http:
+      paths:
+      - backend:
+          serviceName: meotic-nginx
+          servicePort: 80
+        path: /
+status:
+  loadBalancer: {}
